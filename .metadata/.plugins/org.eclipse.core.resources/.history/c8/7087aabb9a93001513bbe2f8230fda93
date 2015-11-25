@@ -2,7 +2,7 @@
 <parameter name="param" value="Test"/>
 <test name="Login on browser browserFirefox">
 <classes>
-<class name="brand.preference.DesktopPreferenceCenter"/>
+<class name="brand.production.mobile.PeptoPreferenceCenter"/>
 </classes>
 </test>
 </suite>
