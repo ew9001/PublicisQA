@@ -274,3 +274,6 @@ java.lang.NullPointerException
 
 !ENTRY com.android.ide.eclipse.adt 2 0 2015-11-25 12:40:22.918
 !MESSAGE No projects found for [/Users/agolubev1/Desktop/PublicisQA/brands/PreferenceCenterBrands.xml]
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2015-11-25 12:47:11.956
+!MESSAGE No projects found for [/Users/agolubev1/Desktop/PublicisQA/brands/PreferenceCenterBrands.xml]

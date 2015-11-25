@@ -1,7 +1,7 @@
 <suite name="Browser Print " verbose="1">
-
-<test name="Chrome Preference Center">
-
+<parameter name="param" value="Test"/>
+<test name="Print on browser Firefox">
+<parameter name="browser" value="browserFirefox"/>
 <classes>
 <class name="brand.preference.DesktopPreferenceCenter"/>
 </classes>
