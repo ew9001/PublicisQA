@@ -1,0 +1,8 @@
+<suite name="Browser Login " verbose="1">
+<parameter name="param" value="Test"/>
+<test name="Login on browser browserFirefox">
+<classes>
+<class name="brand.production.mobile.PeptoPreferenceCenter"/>
+</classes>
+</test>
+</suite>
