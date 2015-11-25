@@ -1,8 +1,11 @@
-<suite name="Browser Login " verbose="1">
+<suite name="Browser Print " verbose="1">
 <parameter name="param" value="Test"/>
-<test name="Login on browser browserFirefox">
+<test name="Print on browser Firefox">
+<parameter name="browser" value="browserFirefox"/>
 <classes>
 <class name="brand.preference.DesktopPreferenceCenter"/>
 </classes>
+
 </test>
+
 </suite>

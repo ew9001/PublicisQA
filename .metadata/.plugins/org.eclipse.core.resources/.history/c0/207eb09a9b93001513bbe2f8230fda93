@@ -1,0 +1,58 @@
+<suite name="Browser Print " verbose="1">
+<parameter name="param" value="Test"/>
+<test name="Print on browser Firefox">
+<parameter name="browser" value="firefox"/>
+<classes>
+<class name="brand.prilosec.PrilosecDesktopLogin"/>
+</classes>
+<groups>
+<run>
+<include name="create"/>
+</run>
+</groups>
+</test>
+<test name="Print on browser IE10">
+<parameter name="browser" value="browserIE10"/>
+<classes>
+<class name="brand.prilosec.PrilosecDesktopLogin"/>
+</classes>
+<groups>
+<run>
+<include name="create"/>
+</run>
+</groups>
+</test>
+<test name="Print on browser IE11">
+<parameter name="browser" value="browserIE11"/>
+<classes>
+<class name="brand.prilosec.PrilosecDesktopLogin"/>
+</classes>
+<groups>
+<run>
+<include name="create"/>
+</run>
+</groups>
+</test>
+<test name="Print on browser Chrome">
+<parameter name="browser" value="Chrome"/>
+<classes>
+<class name="brand.prilosec.PrilosecDesktopLogin"/>
+</classes>
+<groups>
+<run>
+<include name="create"/>
+</run>
+</groups>
+</test>
+<test name="Print on browser Safari">
+<parameter name="browser" value="safari"/>
+<classes>
+<class name="brand.prilosec.PrilosecDesktopLogin"/>
+</classes>
+<groups>
+<run>
+<include name="create"/>
+</run>
+</groups>
+</test>
+</suite>

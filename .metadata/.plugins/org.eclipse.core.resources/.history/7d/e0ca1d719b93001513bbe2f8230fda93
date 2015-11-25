@@ -1,0 +1,12 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+
+
+<suite name="Browser Login " verbose="1">
+<parameter name="param" value="Test"/>
+<test name="Login on browser browserFirefox">
+<classes>
+<class name="brand.preference.DesktopPreferenceCenter"/>
+</classes>
+</test>
+</suite>
