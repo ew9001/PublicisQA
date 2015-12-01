@@ -65,7 +65,7 @@ public class AllDesktopPreferenceCenter {
 	    String safe = "https://10.10.10.34:8080/job/TESTNG3/ws/PageLoads1";
 	  
 	    @Parameters({"browser"})
-	    @Test(groups = {"create"})
+	    @Test(groups = {"create"},priority=1)
 	
 	  public void setBrowser(String browser) throws IOException, InterruptedException
 	  {	   
