@@ -6,7 +6,7 @@
     <test name="Preference Center  IE10">
         <parameter name="browser" value="browserIE10"/>
         <classes>
-            <class name="brand.preference.AllDesktopPreferenceCenter"/>
+            <class name="brand.preference.SwifferAddCarAllDesktopPreferenceCenter"/>
         </classes>
  
         <groups>
@@ -19,7 +19,7 @@
     <test name="Preference Center Firefox">
         <parameter name="browser" value="firefoxMAC"/>
         <classes>
-            <class name="brand.preference.AllDesktopPreferenceCenter"/>
+            <class name="brand.preference.SwifferAddCarAllDesktopPreferenceCenter"/>
         </classes>
  
         <groups>
@@ -34,7 +34,7 @@
     <test name="Preference Center IE11">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="brand.preference.AllDesktopPreferenceCenter"/>
+            <class name="brand.preference.SwifferAddCarAllDesktopPreferenceCenter"/>
         </classes>
  
         <groups>
