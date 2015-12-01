@@ -64,7 +64,7 @@ public class AllDesktopPreferenceCenter {
 		String slide1 = "Today's Fresh Fish";
 	    String safe = "https://10.10.10.34:8080/job/TESTNG3/ws/PageLoads1";
 	  
-	    @Test(groups = {"create"},priority=1)
+	    @Test(groups = {"create"})
 		@Parameters({"browser"})
 	  @BeforeClass
 	  public void beforeClass(String browser) throws IOException, InterruptedException
