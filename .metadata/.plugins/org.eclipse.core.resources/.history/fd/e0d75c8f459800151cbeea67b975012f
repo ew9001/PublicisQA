@@ -190,7 +190,7 @@ public class AllDesktopPreferenceCenter {
 	    
 	      
 	 } 
-	 @Test
+	 
 	 public WebDriver browserIE10() throws MalformedURLException  
 	 {  
 	  
