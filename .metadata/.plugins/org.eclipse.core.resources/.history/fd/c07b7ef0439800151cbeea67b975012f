@@ -154,7 +154,22 @@ public class AllDesktopPreferenceCenter {
 	    	
 		
 	  }
-	 
+	  @BeforeTest
+	  public void beforeTest()
+	  {
+		  System.out.println("Let me run beforeTest");
+	  }  
+	  @Test
+	  public void f()
+	  {
+	       //your test code here
+		  System.out.println("I'm out here print f");
+	  }
+	 @AfterTest
+	 public void afterTest()
+	 {
+		  
+	 }
 	 @AfterClass
 	 public void afterClass()
 	 {
