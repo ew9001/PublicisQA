@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="brand.preference.DesktopPreferenceCenter">
+        <methods>
+          <include name="testValidLogout12"/>
+          <include name="beforeClass"/>
+          <include name="testAllChar10"/>
+          <include name="testValidPassword11"/>
+          <include name="afterClass"/>
+          <include name="testSetRightPassword8"/>
+          <include name="testResetPassword5"/>
+          <include name="testValidLogin4"/>
+          <include name="testBlankLogin02"/>
+          <include name="testShortPassword9"/>
+          <include name="testSetBlankPassword6"/>
+          <include name="testWrongLogin03"/>
+          <include name="testSetWrongPassword7"/>
+        </methods>
+      </class> <!-- brand.preference.DesktopPreferenceCenter -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -1,5 +1,7 @@
 package brand.preference;
 
+import io.netty.handler.codec.EncoderException;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
+
 import org.testng.asserts.SoftAssert;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
@@ -49,6 +52,8 @@ public class DesktopPreferenceCenter  {
 		String data2="" + local + "/" + "homepage.csv";	
 		String myTitle,screenshot;
 		String csvFileToRead;
+		String urlCheck = "http://author.swiffer.pgsitecore.com/en-us";
+	
 		String slide1 = "Today's Fresh Fish";
 	
 		
@@ -67,19 +72,18 @@ public class DesktopPreferenceCenter  {
 
 	@Test(priority=1)
 	
-	public void beforeMethod() {
+	public void beforeMethod01() throws InterruptedException {
 
-		System.out.println("I want to test using browser Chrome ");
+		System.out.println("Test 1 I want to test using browser Chrome ");
 		System.out.println("Let me run in Chrome 45 MAC OS ");
 		 String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub.browserstack.com/wd/hub";
 		 DesiredCapabilities caps = new DesiredCapabilities();
 		 caps.setCapability("browser", "Chrome");
-		 caps.setCapability("browser_version", "45.0");
+		 caps.setCapability("browser_version", "46.0");
 		 caps.setCapability("os", "OS X");
 		 caps.setCapability("os_version", "Yosemite");
+		 caps.setCapability("browserstack.local", "true");
 		 caps.setCapability("resolution", "1024x768");
-		 caps.setCapability("browserstack.debug", "true");
-	 caps.setCapability("browserstack.selenium_version", "2.47.1");
 			
 		 caps.setCapability("acceptSslCerts", "true");
 		    try {
@@ -89,23 +93,23 @@ public class DesktopPreferenceCenter  {
 				e.printStackTrace();
 			}
 	      System.out.println("Let me run Chrome 46 on Windows");
-	      browser_type=" dawn";
+	  	browser_type="swiffer";
 	      System.out.println("Let me see which one get tested" +browser_type);
 	      System.out.println("Let me see which one get tested" +driver);
 	      driver.get("http://www.google.com");
 	      driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	      driver.manage().window().maximize();
 	      System.out.println(data);
-
+			Thread.sleep(100); 
 	}
 	
 	
 	@Test(priority=2)
-	public  void testBlankLogin() {
+	public  void testBlankLogin02() throws IOException, InterruptedException {
 
-			System.out.println("Inside Test 1 - Blank Login");
+			System.out.println("Inside Test 2 - Blank Login");
 			System.out.println("---------------------------");
-			driver.get("http://crest.com/");
+			driver.get(urlCheck);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.className("event_profile_login")).click();
@@ -116,13 +120,21 @@ public class DesktopPreferenceCenter  {
 			
 			//Assert that the error message is present
 			
-			error ="This is a mandatory field";
+			
+			
+			id="phdesktopbody_0_requiredfieldvalidatorusername";
+			actual="This is a mandatory field.";
+			checkText(id,actual);
 		    
 		    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			error ="Fields marked with * are mandatory. Please complete all mandatory fields and re-submit.";
-		   
+			 
+		    
+			id="phdesktopbody_0_Message";
+			actual="Fields marked with * are mandatory. Please complete all mandatory fields and re-submit.";
+			checkText(id,actual);
+			
 		    //Take a picture
 		     
 			 System.out.println("I want to take a picture of the blank username & password");
@@ -130,7 +142,7 @@ public class DesktopPreferenceCenter  {
 			String name=""+ browser_type+"/"+ counter + "_" + "Blank_login.png";
 	       
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
 	        try {
 				takeScreenPortrait(name);
 			} catch (IOException e) {
@@ -142,14 +154,14 @@ public class DesktopPreferenceCenter  {
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				
 				
-			
+				Thread.sleep(100); 
 
 	}
 	
 	@Test(priority=3)
-	 public void testWrongLogin() {
+	 public void testWrongLogin03() throws IOException, InterruptedException {
 		 
-			System.out.println("Inside Test 2 - Wrong Login / Password");
+			System.out.println("Inside Test 3 - Wrong Login / Password");
 			System.out.println("---------------------------");
 			driver.findElement(By.id("phdesktopbody_0_username")).clear();
 		      driver.findElement(By.id("phdesktopbody_0_username")).sendKeys("albert.golubev@pkt.com");
@@ -162,12 +174,16 @@ public class DesktopPreferenceCenter  {
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				error ="The email and password combination you entered is incorrect. Please try again, or click the link below to create an account.";
+				error =
 			    
+				id="phdesktopbody_0_Message";
+				actual="The email and password combination you entered is incorrect. Please try again, or click the link below to create an account.";
+				checkText(id,actual);
+				
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				name=""+ browser_type+"/"+ counter + "_" + "Wrogn_login.png";
+				name=""+ browser_type+"/"+ counter + "_" + "Wrong_login.png";
 		        try {
 					takeScreenPortrait(name);
 				} catch (IOException e) {
@@ -175,20 +191,20 @@ public class DesktopPreferenceCenter  {
 					e.printStackTrace();
 				}
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		        
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(1500, TimeUnit.SECONDS);
-		
+				Thread.sleep(100); 
 	}
 
 	
 
 	@Test(priority=4)
-	public void testValidLogin() throws IOException, InterruptedException{
+	public void testValidLogin4() throws IOException, InterruptedException{
 
-			System.out.println("Inside Test 3 - Right Login");
+			System.out.println("Inside Test 4 - Right Login");
 			System.out.println("---------------------------");
 			driver.navigate().refresh();
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -198,13 +214,18 @@ public class DesktopPreferenceCenter  {
 		      driver.findElement(By.id("phdesktopbody_0_password")).clear();
 		      driver.findElement(By.id("phdesktopbody_0_password")).sendKeys("zaq12wsx");
 		      driver.findElement(By.id("phdesktopbody_0_submit")).click();
-		      System.out.println("--------------------------------------------");
+		    
 		      System.out.println("I want to take a picture of the Valid Login");
 		      driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				error ="Your Profile";
+				
+				id="phdesktopbody_0_TitleText";
+				actual="Your Profile";
+				checkText(id,actual);
+				
 			   // checkText(error);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -212,19 +233,19 @@ public class DesktopPreferenceCenter  {
 				name=""+ browser_type+"/"+ counter + "_" + "Valid_login.png";
 		        takeScreenPortrait(name);
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		        
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(1500, TimeUnit.SECONDS);
-		
+				Thread.sleep(100); 
 	}
 
 
 	@Test(priority=5)
-	public void testResetPassword() throws IOException, InterruptedException{
+	public void testResetPassword5() throws IOException, InterruptedException{
 
-			System.out.println("Inside Test 4 - Reset Password\n");
+			System.out.println("Inside Test 5 - Reset Password\n");
 			System.out.println("---------------------------------");
 			 driver.findElement(By.id("phdesktopbody_0_HlinkEdit")).click();
 			 	driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -239,28 +260,34 @@ public class DesktopPreferenceCenter  {
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				Thread.sleep(100); 
-				error ="Reset Password";
+				//error ="Reset Password";
+				
+				id="phdesktopbody_0_TitleText";
+				actual="Reset Password";
+				checkText(id,actual);
+				
 			   // checkText(error);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				name=""+ browser_type+"/"+ counter + "_" + "Get_To_login.png";
+			    
 		        takeScreenPortrait(name);
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		    
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(1500, TimeUnit.SECONDS);
-		
+				Thread.sleep(100); 
 	}
 	@Test(priority=6)
-	public void testSetBlankPassword() throws IOException, InterruptedException{
+	public void testSetBlankPassword6() throws IOException, InterruptedException{
 
-			System.out.println("Inside Test 5 - Reset Password");
+			System.out.println("Inside Test 6 - Reset Password");
 			System.out.println("---------------------------");
 			driver.findElement(By.id("phdesktopbody_0_LoginSubmitBtn")).click();
-		   	counter+=1;
+		   	
 		      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
 			     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			 
@@ -269,13 +296,16 @@ public class DesktopPreferenceCenter  {
 			 	driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				
-				error ="Fields marked with * are mandatory. Please complete all mandatory fields and re-submit.";
-			   // checkText(error);
-			    
-				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
-				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				
-				error ="This is a mandatory field.";
+			   // checkText(error);
+				id="phdesktopbody_0_Message";
+				actual="Fields marked with * are mandatory. Please complete all mandatory fields and re-submit.";
+				checkText(id,actual);
+				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+				id="phdesktopbody_0_ctl02";
+				actual="This is a mandatory field.";
+				checkText(id,actual);
 			   // checkText(error);
 				Thread.sleep(100); 
 			
@@ -285,7 +315,7 @@ public class DesktopPreferenceCenter  {
 				name=""+ browser_type+"/"+ counter + "_" + "No email or password.png";
 		        takeScreenPortrait(name);
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		        
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -295,9 +325,9 @@ public class DesktopPreferenceCenter  {
 	
 	@Test(priority=7)
 	
-	public void testSetWrongPassword() throws IOException, InterruptedException{
+	public void testSetWrongPassword7() throws IOException, InterruptedException{
 
-			System.out.println("Inside Test 6 - Wrong Email & Zipcode");
+			System.out.println("Inside Test 7 - Wrong Email & Zipcode");
 			System.out.println("-------------------------------------");
 		   	
 		      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
@@ -308,14 +338,18 @@ public class DesktopPreferenceCenter  {
 			     driver.findElement(By.id("phdesktopbody_0_zipcode")).sendKeys("11235");
 			     driver.findElement(By.id("phdesktopbody_0_LoginSubmitBtn")).click();
 			     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			  	counter+=1;
+			  	
 			  	
 			     driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 			 	driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				
-				error ="We could not find an account with that Email address and Birthday/ZIP code.";
+			
 			   // checkText(error);
+				
+				id="phdesktopbody_0_Message";
+				actual ="We could not find an account with that Email address and Birthday/ZIP code.";
+				checkText(id,actual);
 			    
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
@@ -325,7 +359,7 @@ public class DesktopPreferenceCenter  {
 				name=""+ browser_type+"/"+ counter + "_" + "Wrong email and zipcode.png";
 		        takeScreenPortrait(name);
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		        
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -338,21 +372,27 @@ public class DesktopPreferenceCenter  {
 	
 @Test(priority=8)
 	
-	public void testSetRightPassword() throws IOException, InterruptedException{
-
-			System.out.println("Inside Test 7 - Right Email & Zipcode");
+	public void testSetRightPassword8() throws IOException, InterruptedException{
+			
+			System.out.println("Inside Test 8 - Right Email & Zipcode");
 			System.out.println("-------------------------------------");
 		   	
 		      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
 			     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			 
+			     driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
+			     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			     
+			     driver.findElement(By.id("phdesktopbody_0_username")).clear();
+			     driver.findElement(By.id("phdesktopbody_0_zipcode")).clear();
+			     
 			     driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 			     driver.findElement(By.id("phdesktopbody_0_username")).clear();
 			     driver.findElement(By.id("phdesktopbody_0_username")).sendKeys("albert.golubev@pkt.com");
+			     driver.findElement(By.id("phdesktopbody_0_zipcode")).clear();
 			     driver.findElement(By.id("phdesktopbody_0_zipcode")).sendKeys("11235");
 			     driver.findElement(By.id("phdesktopbody_0_LoginSubmitBtn")).click();
 			     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			  	counter+=1;
+			  	
 			  	
 			     driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 			 	driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
@@ -361,6 +401,11 @@ public class DesktopPreferenceCenter  {
 				error ="Set Password";
 			   // checkText(error);
 			    
+				id="phdesktopbody_0_TitleText";
+				actual="Set Password";
+				checkText(id,actual);
+				
+				
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
 				
@@ -369,7 +414,7 @@ public class DesktopPreferenceCenter  {
 				name=""+ browser_type+"/"+ counter + "_" + "Right email and zipcode.png";
 		        takeScreenPortrait(name);
 		        System.out.println("Image Name " +name);
-		        counter+=1;
+		        
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -380,9 +425,9 @@ public class DesktopPreferenceCenter  {
 
 @Test(priority=9)
 
-public void testShortPassword() throws IOException, InterruptedException{
+public void testShortPassword9() throws IOException, InterruptedException{
 
-		System.out.println("Inside Test 8 - Set Short Password");
+		System.out.println("Inside Test 9 - Set Short Password");
 		System.out.println("-------------------------------------");
 	   	
 	      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
@@ -397,8 +442,14 @@ public void testShortPassword() throws IOException, InterruptedException{
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     
-		     error ="The password must be minimum 8 characters, including at least 1 letter and 1 number.";
+		   
 		    // checkText(error);
+		     
+		 	id="phdesktopbody_0_Message";
+		 	 actual ="The password must be minimum 8 characters, including at least 1 letter and 1 number.";
+			checkText(id,actual);
+			
+			
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
@@ -406,7 +457,7 @@ public void testShortPassword() throws IOException, InterruptedException{
 			name=""+ browser_type+"/"+ counter + "_" + "Short Password.png";
 	        takeScreenPortrait(name);
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -416,9 +467,9 @@ public void testShortPassword() throws IOException, InterruptedException{
 
 @Test(priority=10)
 
-public void testAllChar() throws IOException, InterruptedException{
+public void testAllChar10() throws IOException, InterruptedException{
 
-		System.out.println("Inside Test 9 - Set password to ABCabcDEF");
+		System.out.println("Inside Test 10 - Set password to ABCabcDEF");
 		System.out.println("-------------------------------------");
 	   	
 	      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
@@ -434,7 +485,12 @@ public void testAllChar() throws IOException, InterruptedException{
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     
-		     error ="The password must be minimum 8 characters, including at least 1 letter and 1 number";
+		    actual ="The password must be minimum 8 characters, including at least 1 letter and 1 number";
+		     
+		  	id="phdesktopbody_0_Message";
+		 	 
+			checkText(id,actual);
+			
 		    // checkText(error);
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -443,7 +499,7 @@ public void testAllChar() throws IOException, InterruptedException{
 			name=""+ browser_type+"/"+ counter + "_" + "Password all characters.png";
 	        takeScreenPortrait(name);
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -454,9 +510,9 @@ public void testAllChar() throws IOException, InterruptedException{
 
 @Test(priority=11)
 
-public void testValidPassword() throws IOException, InterruptedException{
+public void testValidPassword11() throws IOException, InterruptedException{
 
-		System.out.println("Inside Test 10 - Set password to original");
+		System.out.println("Inside Test 11 - Set password to original");
 		System.out.println("-------------------------------------");
 	   	
 	      Thread.sleep(200);
@@ -475,8 +531,19 @@ public void testValidPassword() throws IOException, InterruptedException{
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		     
-		     error ="Don't have an account yet?";
+		    
 		    // checkText(error);
+		     
+		     
+		     
+		     actual ="Don't have an account yet?";
+		     
+			  	id="phdesktopbody_0_labeloptionalcreateprofile";
+			 	 
+				checkText(id,actual);
+				
+		     
+		     
 		     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
@@ -484,7 +551,7 @@ public void testValidPassword() throws IOException, InterruptedException{
 			name=""+ browser_type+"/"+ counter + "_" + "Changed Password.png";
 	        takeScreenPortrait(name);
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -494,9 +561,9 @@ public void testValidPassword() throws IOException, InterruptedException{
 
 @Test(priority=12)
 
-public void testValidLogout() throws IOException, InterruptedException{
+public void testValidLogout12() throws IOException, InterruptedException{
 
-		System.out.println("Inside Test 11 - Set password to original");
+		System.out.println("Inside Test 12 - Set password to original");
 		System.out.println("-------------------------------------");
 	   	
 	      driver.manage().timeouts().implicitlyWait(450, TimeUnit.SECONDS);
@@ -534,7 +601,7 @@ public void testValidLogout() throws IOException, InterruptedException{
 			name=""+ browser_type+"/"+ counter + "_" + "Logout_Popup.png";
 	        takeScreenPortrait(name);
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
    
    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
    
@@ -551,22 +618,23 @@ public void testValidLogout() throws IOException, InterruptedException{
 		 name=""+ browser_type+"/"+ counter + "_" + "Continue_Button_Click.png";
 	        takeScreenPortrait(name);
 	        System.out.println("Image Name " +name);
-	        counter+=1;
+	        
 	      
 		   driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		 
 			
-			id="phdesktopheader_0_phdesktopheadertop_1_anchrContinue";
+			id="phdesktopheader_0_phdesktopheadertop_2_anchrContinue";
 			actual="LOG OUT";
 			checkText(id,actual);
+	
 			   driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			 
 			
-			driver.findElement(By.id("phdesktopheader_0_phdesktopheadertop_1_anchrContinue")).click();
+			driver.findElement(By.id("phdesktopheader_0_phdesktopheadertop_2_anchrContinue")).click();
 	     
 	
 }
@@ -580,21 +648,40 @@ public void testValidLogout() throws IOException, InterruptedException{
 	    driver.quit();
 	}
 	
+	@Test
 	//This function will check the assertion on the page
-	public WebDriver checkText(String id, String actual) throws IOException
+	public String checkText(String id, String actual) throws IOException
 	 {
 			
 		  ActualText = driver.findElement(By.id(id)).getText();
-		   soft_assert.assertEquals(ActualText, actual);
+		  
+		  
+	
+		 
+		  System.out.println("I just tested Assertion for text " +actual);
+		   System.out.println("The text that I was expected to see was " +ActualText);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			soft_assert.assertAll();
+		    
+			try
+			{
+				 soft_assert.assertEquals(ActualText, actual,"Failed Asserting for text " +actual);
+
+			} catch (EncoderException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				name="Failed"+ browser_type+"/"+ counter + "_" + "Failed Assertion" +".png";
+		        takeScreenPortrait(name);
+		        System.out.println("Image Name " +name);
+			}
 			
-			return driver;
+			return ActualText;
 	     
+		 }
 		    
-		    
-	 }
+	 
 	 public WebDriver browserChrome() throws MalformedURLException  
 	 {  
 	  
@@ -831,6 +918,7 @@ public void testValidLogout() throws IOException, InterruptedException{
 		    
 		    driver.manage().timeouts().implicitlyWait(450000, TimeUnit.SECONDS);
 		    FileUtils.copyFile(screenshot, new File(name));
+		    counter+=1;
 		    
 		    return driver;
 	 }
