@@ -66,8 +66,8 @@ public class AllDesktopPreferenceCenter {
 	  
 	    @Parameters({"browser"})
 	    @Test(groups = {"create"},priority=1)
-	
-	  public void setBrowser(String browser) throws IOException, InterruptedException
+		@BeforeClass
+	  public void beforeClass(String browser) throws IOException, InterruptedException
 	  {	   
 		  
 		  
